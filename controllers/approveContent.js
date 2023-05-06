@@ -18,7 +18,7 @@ const approveContent = async (req, res) => {
         }
         
         deleteDoc(doc(db, "hold", fileId));
-        res.status(200).json({ success: true });
+        res.status(200).redirect("http://localhost:3000/adminpi");
     });
 };
 

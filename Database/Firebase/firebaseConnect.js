@@ -33,7 +33,7 @@ const googleProvider = new GoogleAuthProvider();
 
 // read();
 
-const uploadFile = async (file, name, cls, sub, tags, userName, uid) => {
+const uploadFile = async (file, name, cls, sub, userName, uid, format) => {
     const date = new Date();
     const storageName =
         date.getTime() + "_" + name.toLowerCase().replace(/\s/g, "_");
@@ -48,12 +48,12 @@ const uploadFile = async (file, name, cls, sub, tags, userName, uid) => {
     await addToHold({
         createdOn,
         name,
-        tags,
         class: cls,
         subject: sub,
         link: downloadLink,
         userName,
-        uid
+        uid,
+        format
     });
 
     console.log(name, "Uploaded");
