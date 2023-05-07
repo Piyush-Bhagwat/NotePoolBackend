@@ -53,7 +53,7 @@ const uploadFile = async (file, name, cls, sub, userName, uid, format) => {
         link: downloadLink,
         userName,
         uid,
-        format
+        format,
     });
 
     console.log(name, "Uploaded");
@@ -85,7 +85,7 @@ const readHold = async (fileID) => {
     return docSnap.data();
 };
 
-const readDataCollection = async (cls, sub) => {
+const readDataCollectionWithFilter = async (cls, sub) => {
     const data = await getDocs(dataRef);
     return data.docs.map((dat) => {
         if (
@@ -94,6 +94,12 @@ const readDataCollection = async (cls, sub) => {
         ) {
             return { ...dat.data(), id: dat.id };
         }
+    });
+};
+const readDataCollection = async () => {
+    const data = await getDocs(dataRef);
+    return data.docs.map((dat) => {
+        return { ...dat.data(), id: dat.id };
     });
 };
 
@@ -111,6 +117,7 @@ export {
     addToHold,
     readData,
     readHold,
+    readDataCollectionWithFilter,
     readDataCollection,
     readHoldCollection,
     uploadFile,

@@ -1,8 +1,9 @@
 import express from "express";
 import newPost from "../controllers/newPostCont.js";
 import { fileDownload } from "../controllers/fileDownload.js";
-import { readDataCollection, readHoldCollection } from "../Database/Firebase/firebaseConnect.js";
+import { readDataCollectionWithFilter, readHoldCollection } from "../Database/Firebase/firebaseConnect.js";
 import approveContent from "../controllers/approveContent.js";
+import { userUpload } from "../controllers/userUploadCont.js";
 
 const router = express.Router();
 
@@ -14,7 +15,7 @@ router.route("/getdata").get(async (req,res)=>{
     const cls = req.query.cls;
     const sub = req.query.subject;
 
-    readDataCollection(cls, sub).then((data)=>{
+    readDataCollectionWithFilter(cls, sub).then((data)=>{
         res.status(200).json(data);
     });
 });
@@ -27,5 +28,6 @@ router.route("/gethold").get(async (req, res)=>{
 
 router.route("/approvedata").get(approveContent);
 
+router.route("/getuseruploads").get(userUpload);
 
 export default router;
