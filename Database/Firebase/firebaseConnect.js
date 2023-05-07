@@ -2,7 +2,6 @@ import { initializeApp } from "firebase/app";
 import { config } from "dotenv";
 import {
     getFirestore,
-    setDoc,
     addDoc,
     collection,
     getDoc,

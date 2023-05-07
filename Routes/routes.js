@@ -4,6 +4,7 @@ import { fileDownload } from "../controllers/fileDownload.js";
 import { readDataCollectionWithFilter, readHoldCollection } from "../Database/Firebase/firebaseConnect.js";
 import approveContent from "../controllers/approveContent.js";
 import { userUpload } from "../controllers/userUploadCont.js";
+import getSingleNote from "../controllers/getSingleNote.js";
 
 const router = express.Router();
 
@@ -19,6 +20,8 @@ router.route("/getdata").get(async (req,res)=>{
         res.status(200).json(data);
     });
 });
+
+router.route("/getsinglenote").get(getSingleNote);
 
 router.route("/gethold").get(async (req, res)=>{
     readHoldCollection().then((data) => {
