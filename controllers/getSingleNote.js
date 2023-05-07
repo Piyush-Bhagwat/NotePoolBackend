@@ -6,7 +6,9 @@ const getSingleNote = async (req, res) => {
     const noteRef = doc(db, "data", noteID);
     const note = await (getDoc(noteRef));
 
-    res.status(200).json(note.data());
+    const noteToUpload = {...note.data(), id: note.id}
+
+    res.status(200).json(noteToUpload);
 };
 
 export default getSingleNote;
