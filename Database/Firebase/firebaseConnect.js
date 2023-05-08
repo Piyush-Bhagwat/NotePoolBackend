@@ -86,13 +86,15 @@ const readHold = async (fileID) => {
 
 const readDataCollectionWithFilter = async (cls, sub) => {
     const data = await getDocs(dataRef);
-    return data.docs.map((dat) => {
-        if (
+
+    const notesToSend = data.docs.filter((dat) => {
+        return (
             dat.data().class === cls &&
             (dat.data().subject === sub || sub === "all")
-        ) {
+        );
+    });
+    return notesToSend.map((dat) => {
             return { ...dat.data(), id: dat.id };
-        }
     });
 };
 const readDataCollection = async () => {
