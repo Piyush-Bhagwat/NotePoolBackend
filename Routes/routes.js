@@ -5,6 +5,7 @@ import { readDataCollectionWithFilter, readHoldCollection } from "../Database/Fi
 import approveContent from "../controllers/approveContent.js";
 import { userUpload } from "../controllers/userUploadCont.js";
 import getSingleNote from "../controllers/getSingleNote.js";
+import deleteHandler from "../controllers/deleteCont.js";
 
 const router = express.Router();
 
@@ -32,5 +33,7 @@ router.route("/gethold").get(async (req, res)=>{
 router.route("/approvedata").get(approveContent);
 
 router.route("/getuseruploads").get(userUpload);
+
+router.route("/deletenote").get(deleteHandler)
 
 export default router;

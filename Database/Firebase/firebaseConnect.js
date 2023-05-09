@@ -7,9 +7,16 @@ import {
     getDoc,
     doc,
     getDocs,
+    deleteDoc,
 } from "firebase/firestore";
 
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import {
+    getStorage,
+    ref,
+    uploadBytes,
+    getDownloadURL,
+    deleteObject,
+} from "firebase/storage";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 config({ path: "./config.env" });
@@ -39,7 +46,7 @@ const uploadFile = async (file, name, cls, sub, userName, uid, format) => {
     const createdOn = `${date.getDate()}/${
         date.getMonth() + 1
     }/${date.getFullYear()}`;
-    const savePath = `/testData/${cls}/${sub}/${storageName}`;
+    const savePath = `/data/${cls}/${sub}/${storageName}`;
 
     const sourceRef = ref(storage, savePath);
     await uploadBytes(sourceRef, file);
@@ -53,6 +60,7 @@ const uploadFile = async (file, name, cls, sub, userName, uid, format) => {
         userName,
         uid,
         format,
+        fileLocation: savePath,
     });
 
     console.log(name, "Uploaded");
@@ -94,7 +102,7 @@ const readDataCollectionWithFilter = async (cls, sub) => {
         );
     });
     return notesToSend.map((dat) => {
-            return { ...dat.data(), id: dat.id };
+        return { ...dat.data(), id: dat.id };
     });
 };
 const readDataCollection = async () => {
@@ -111,9 +119,19 @@ const readHoldCollection = async () => {
     });
 };
 
+const deleteNote = async (fileLocation, noteID) => {
+    const deleteNoteRef = ref(storage, fileLocation);
+    console.log(fileLocation);
+    await deleteObject(deleteNoteRef);
+
+    const deleteDocRef = doc(db, "data", noteID);
+    await deleteDoc(deleteDocRef);
+};
+
 export {
     app,
     db,
+    storage,
     addToTestData,
     addToHold,
     readData,
@@ -122,4 +140,5 @@ export {
     readDataCollection,
     readHoldCollection,
     uploadFile,
+    deleteNote,
 };
