@@ -23,8 +23,6 @@ const userUpload = async (req, res) => {
         
     });
 
-    console.log(dataUploaded);
-
     res.status(200).json({hold: dataOnHold, uploaded: dataUploaded});
 }
 
