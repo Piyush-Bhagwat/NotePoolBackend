@@ -10,10 +10,15 @@ config({ path: "./config.env" });
 
 const app = express();
 
+app.use(
+    cors({
+        origin: "*",
 
-app.use(cors({
-    origin: "*",
-}));
+        methods: ["GET", "POST"],
+
+        allowedHeaders: ["Content-Type"],
+    })
+);
 app.use("/public", express.static("public"));
 app.use(expressUpload());
 
