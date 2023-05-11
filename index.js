@@ -11,7 +11,9 @@ config({ path: "./config.env" });
 const app = express();
 
 
-app.use(cors());
+app.use(cors({
+    origin: "*",
+}));
 app.use("/public", express.static("public"));
 app.use(expressUpload());
 
