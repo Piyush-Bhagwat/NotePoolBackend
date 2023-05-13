@@ -12,14 +12,13 @@ const app = express();
 
 app.use(
     cors({
-        origin: ["https://notespool.netlify.app/", "*"],
-
+        origin: ["https://notespool.netlify.app/", "http://localhost:3000"],
         methods: ["GET", "POST"],
-
         allowedHeaders: ["Content-Type"],
     })
 );
-app.use("/public", express.static("public"));
+
+app.use("/public", cors(), express.static("public"));
 app.use(expressUpload());
 
 app.use(bodyParser.json());
