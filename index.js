@@ -12,7 +12,7 @@ const app = express();
 
 app.use(
     cors({
-        origin: "*",
+        origin: ["https://notespool.netlify.app/", "*"],
 
         methods: ["GET", "POST"],
 
