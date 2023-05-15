@@ -120,12 +120,14 @@ const readHoldCollection = async () => {
 };
 
 const deleteNote = async (fileLocation, noteID) => {
+    const deleteDocRef = doc(db, "data", noteID);
+    console.log(noteID);
+    await deleteDoc(deleteDocRef);
+
     const deleteNoteRef = ref(storage, fileLocation);
     console.log(fileLocation);
     await deleteObject(deleteNoteRef);
 
-    const deleteDocRef = doc(db, "data", noteID);
-    await deleteDoc(deleteDocRef);
 };
 
 export {
