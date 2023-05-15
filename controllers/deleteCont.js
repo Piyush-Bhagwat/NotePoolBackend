@@ -6,7 +6,7 @@ const deleteHandler = async (req,res)=>{
 
     readData(noteID).then((data)=>{
         deleteNote(data.fileLocation, noteID);
-        res.status(200).redirect("https:/notespool.netlify.app/adminpi/home");
+        res.status(200).redirect("https://notespool.netlify.app/adminpi/home");
     })
 
     console.log("Deleteted: ", noteID);
