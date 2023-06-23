@@ -39,4 +39,8 @@ router.route("/getuseruploads").get(userUpload);
 
 router.route("/deletenote").get(deleteHandler);
 
+router.route("/start").get((req, res) => {
+    res.status(200).json({success: true});
+})
+
 export default router;
